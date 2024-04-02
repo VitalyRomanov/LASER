@@ -1,0 +1,1 @@
+docker run -p 7000:80 -v $HOME/dev/LASER/models:/app/LASER/models -v $HOME/dev/LASER/source:/app/LASER/source -v $HOME/dev/language-learner/data:/data -v $HOME/dev/LASER/docker:/app/LASER/docker -e PYTHONPATH='/app/LASER/' -it laser_base python /app/LASER/docker/app.py

@@ -25,3 +25,7 @@ params = {"q": "Hey, how are you?\nI'm OK and you?", "lang": "en"}
 resp = requests.get(url=url, params=params).json()
 print(resp["embedding"])
 ```
+
+```commandline
+docker run -v $HOME/dev/LASER/models:/app/LASER/models -v $HOME/dev/LASER/source:/app/LASER/source -v $HOME/dev/language-learner/data:/data -e PYTHONPATH='/app/LASER/' -it laser_base2 python /app/LASER/source/embed_file.py --input /data/WikiMatrix.ru-tt.tt --output /data/WikiMatrix.ru-tt.tt.vec --encoder tat --verbose
+```

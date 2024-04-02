@@ -553,6 +553,16 @@ def embed_sentences(
         )
 
 
+def select_encoder_and_spm(model_name):
+    assert os.environ.get('LASER'), 'Please set the environment variable LASER'
+    LASER = Path(os.environ['LASER'])
+
+    encoder = LASER / "models" / (model_name + ".pt")
+    spm = LASER / "models" / (model_name + ".spm")
+
+    return str(encoder), str(spm if spm.is_file() else LASER / "models" / ("laser2" + ".spm"))
+
+
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="LASER: Embed sentences")
     parser.add_argument(
@@ -612,14 +622,28 @@ if __name__ == "__main__":
     )
 
     args = parser.parse_args()
+
+    language_model_map = {
+        "tat": "laser3-tat_Cyrl.v1",
+        "tur": "laser3-tur_Latn.v1",
+        "kaz": "laser3-kaz_Cyrl.v1",
+        "bak": "laser3-bak_Cyrl.v1",
+    }
+
+    spm_lang = args.encoder
+    encoder_path, spm_model = select_encoder_and_spm(language_model_map.get(args.encoder, "laser2"))
+
+    if args.verbose:
+        logger.info(f"Requested encoder {args.encoder}, using model {encoder_path}")
+
     embed_sentences(
         ifname=args.input,
-        encoder_path=args.encoder,
+        encoder_path=encoder_path,
         token_lang=args.token_lang,
         bpe_codes=args.bpe_codes,
-        spm_lang=args.spm_lang,
+        spm_lang=spm_lang,
         hugging_face=args.use_hugging_face,
-        spm_model=args.spm_model,
+        spm_model=spm_model,
         verbose=args.verbose,
         output=args.output,
         buffer_size=args.buffer_size,

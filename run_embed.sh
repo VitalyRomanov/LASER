@@ -1,0 +1,3 @@
+docker run -v $HOME/dev/LASER/models:/app/LASER/models -v $HOME/dev/LASER/source:/app/LASER/source -v /Users/LTV/dev/language-learner/data:/data -e PYTHONPATH='/app/LASER/' -it laser_base python /app/LASER/source/embed_file.py --input /data/harry_potter_1.ru --output /data/harry_potter_1.ru.vec --encoder rus --verbose --buffer-size 10
+
+docker run -v $HOME/dev/LASER/models:/app/LASER/models -v $HOME/dev/LASER/source:/app/LASER/source -v $HOME/dev/language-learner/data:/data -e PYTHONPATH='/app/LASER/' -it laser_base python /app/LASER/source/embed_file.py --input /data/harry_potter_1.tt --output /data/harry_potter_1.tt.vec --encoder tat --verbose --buffer-size 10

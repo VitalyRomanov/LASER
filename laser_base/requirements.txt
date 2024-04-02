@@ -5,4 +5,3 @@ Cython==0.29.35
 torch=1.12.1
 transliterate==1.10.2
 fairseq==0.12.2
-sentence_transformers

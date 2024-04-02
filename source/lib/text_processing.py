@@ -28,7 +28,7 @@ logging.basicConfig(
 logger = logging.getLogger("preprocess")
 
 # get environment
-assert os.environ.get('LASER'), 'Please set the enviornment variable LASER'
+assert os.environ.get('LASER'), 'Please set the environment variable LASER'
 LASER = os.environ['LASER']
 
 FASTBPE = LASER + '/tools-external/fastBPE/fast'
